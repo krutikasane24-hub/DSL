@@ -1,0 +1,93 @@
+#include <iostream>
+using namespace std;
+
+class Node
+{
+public:
+    int data;
+    Node* left;
+    Node* right;
+
+    Node(int value)
+    {
+        data = value;
+        left = NULL;
+        right = NULL;
+    }
+};
+
+class BinaryTree
+{
+public:
+
+    Node* createTree()
+    {
+        int value;
+
+        cout << "Enter value (-1 for no node): ";
+        cin >> value;
+
+        if (value == -1)
+        {
+            return NULL;
+        }
+
+        Node* newNode = new Node(value);
+
+        cout << "Enter left child of " << value << endl;
+        newNode->left = createTree();
+
+        cout << "Enter right child of " << value << endl;
+        newNode->right = createTree();
+
+        return newNode;
+    }
+
+    void inorder(Node* root)
+    {
+        if (root != NULL)
+        {
+            inorder(root->left);
+            cout << root->data << " ";
+            inorder(root->right);
+        }
+    }
+
+    void preorder(Node* root)
+    {
+        if (root != NULL)
+        {
+            cout << root->data << " ";
+            preorder(root->left);
+            preorder(root->right);
+        }
+    }
+
+    void postorder(Node* root)
+    {
+        if (root != NULL)
+        {
+            postorder(root->left);
+            postorder(root->right);
+            cout << root->data << " ";
+        }
+    }
+};
+
+int main()
+{
+    BinaryTree tree;
+
+    Node* root = tree.createTree();
+
+    cout << "\nInorder: ";
+    tree.inorder(root);
+
+    cout << "\nPreorder: ";
+    tree.preorder(root);
+
+    cout << "\nPostorder: ";
+    tree.postorder(root);
+
+    return 0;
+}
