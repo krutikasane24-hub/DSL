@@ -1,0 +1,120 @@
+#include <iostream>
+using namespace std;
+
+class Stack
+{
+    int stack[20];
+    int top;
+
+public:
+
+    Stack()
+    {
+        top = -1;
+    }
+
+    void push(int value)
+    {
+        if (top == 19)
+        {
+            cout << "Stack Overflow\n";
+        }
+        else
+        {
+            top++;
+            stack[top] = value;
+            cout << "Book returned successfully\n";
+        }
+    }
+
+    void pop()
+    {
+        if (top == -1)
+        {
+            cout << "Stack Underflow\n";
+        }
+        else
+        {
+            cout << "Book arranged: " << stack[top] << endl;
+            top--;
+        }
+    }
+
+    void peek()
+    {
+        if (top == -1)
+        {
+            cout << "Stack is empty\n";
+        }
+        else
+        {
+            cout << "Top book: " << stack[top] << endl;
+        }
+    }
+
+    void display()
+    {
+        if (top == -1)
+        {
+            cout << "Stack is empty\n";
+        }
+        else
+        {
+            cout << "Stack:\n";
+
+            for (int i = top; i >= 0; i--)
+            {
+                cout << stack[i] << endl;
+            }
+        }
+    }
+};
+
+int main()
+{
+    Stack s;
+    int choice, value;
+
+    do
+    {
+        cout << "\n1. Return Book (Push)";
+        cout << "\n2. Arrange Book (Pop)";
+        cout << "\n3. Top Book (Peek)";
+        cout << "\n4. Display Stack";
+        cout << "\n5. Exit";
+
+        cout << "\nEnter choice: ";
+        cin >> choice;
+
+        switch (choice)
+        {
+            case 1:
+                cout << "Enter book ID: ";
+                cin >> value;
+                s.push(value);
+                break;
+
+            case 2:
+                s.pop();
+                break;
+
+            case 3:
+                s.peek();
+                break;
+
+            case 4:
+                s.display();
+                break;
+
+            case 5:
+                cout << "Program ended\n";
+                break;
+
+            default:
+                cout << "Invalid choice\n";
+        }
+
+    } while (choice != 5);
+
+    return 0;
+}
